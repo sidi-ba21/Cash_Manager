@@ -2,7 +2,7 @@
 
 ## Technologies
 
-- RESTEasy JAX-RS (https://resteasy.dev/)
+- Spring boot (https://spring.io/)
 - Maven (https://maven.apache.org/)
 
 ## Requirements
