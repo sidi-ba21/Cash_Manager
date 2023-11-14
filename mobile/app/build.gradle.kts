@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.regaz.cashmanager"
+    namespace = "com.cashmanager.mobile"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.regaz.cashmanager"
+        applicationId = "com.cashmanager.mobile"
         minSdk = 27
         targetSdk = 33
         versionCode = 1

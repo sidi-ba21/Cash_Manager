@@ -17,17 +17,8 @@
 
 - show ./Dockerfile
 
-### Manually
-
-#### Compile
+#### Manually
 
 ```
-cd back
-gradle build
-```
-
-#### Execute
-
-```
-java -jar ./build/libs/cash.war
+mvn spring-boot:run
 ```

@@ -1,5 +1,6 @@
 package com.cashmanager.bank;
 
+import com.cashmanager.bank.providers.GsonProvider;
 import org.jboss.resteasy.plugins.interceptors.encoding.AcceptEncodingGZIPFilter;
 import org.jboss.resteasy.plugins.interceptors.encoding.GZIPDecodingInterceptor;
 import org.jboss.resteasy.plugins.interceptors.encoding.GZIPEncodingInterceptor;
@@ -9,7 +10,7 @@ import javax.ws.rs.core.Application;
 import java.util.*;
 
 @ApplicationPath("")
-public class Bank extends Application {
+public class BankMain extends Application {
 
 	@Override
 	public Set<Class<?>> getClasses() {
