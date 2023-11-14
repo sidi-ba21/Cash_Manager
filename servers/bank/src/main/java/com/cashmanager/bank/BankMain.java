@@ -1,34 +1,13 @@
 package com.cashmanager.bank;
 
-import com.cashmanager.bank.providers.GsonProvider;
-import org.jboss.resteasy.plugins.interceptors.encoding.AcceptEncodingGZIPFilter;
-import org.jboss.resteasy.plugins.interceptors.encoding.GZIPDecodingInterceptor;
-import org.jboss.resteasy.plugins.interceptors.encoding.GZIPEncodingInterceptor;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-import java.util.*;
+@SpringBootApplication
+public class BankMain {
 
-@ApplicationPath("")
-public class BankMain extends Application {
-
-	@Override
-	public Set<Class<?>> getClasses() {
-		Set<Class<?>> classes = new HashSet<>();
-
-		classes.add(GsonProvider.class);
-		classes.add(AcceptEncodingGZIPFilter.class);
-		classes.add(GZIPDecodingInterceptor.class);
-		classes.add(GZIPEncodingInterceptor.class);
-
-		return classes;
-	}
-
-	@Override
-	public Set<Object> getSingletons() {
-		Set<Object> singletons = new HashSet<>();
-
-		return singletons;
+	public static void main(String[] args) {
+		SpringApplication.run(BankMain.class, args);
 	}
 
 }
