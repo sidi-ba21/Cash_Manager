@@ -1,15 +1,15 @@
-# Cash Manager - Bank
+♦# Cash Manager - Bank
 
 ## Technologies
 
-- RESTEasy JAX-RS (https://resteasy.dev/)
+- Spring boot (https://spring.io/)
 - Maven (https://maven.apache.org/)
 
 ## Requirements
 
 - OpenJDK 17 (https://jdk.java.net/17/)
 - Maven (https://maven.apache.org/)
-- MongoDB (https://www.mongodb.com/)
+- Postgres (https://www.postgresql.org/)
 
 ## Run
 
@@ -20,8 +20,6 @@
 ### Manually
 
 ```
-mvn jetty:run
-
-mvn jetty:run -Djetty.http.port=8081
+mvn spring-boot:run
 ```
 
