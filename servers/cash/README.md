@@ -3,13 +3,13 @@
 ## Technologies
 
 - Spring boot (https://spring.io/)
-- Gradle (https://gradle.org/)
+- Maven (https://maven.apache.org/)
 
 ## Requirements
 
 - OpenJDK 17 (https://jdk.java.net/17/)
-- Gradle (https://gradle.org/)
-- MongoDB (https://www.mongodb.com/)
+- Maven (https://maven.apache.org/)
+- Postgres (https://www.postgresql.org/)
 
 ## Run
 
