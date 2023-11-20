@@ -29,4 +29,5 @@ build/
 !**/src/test/**/build/
 
 Bank.iml
+db/
 pg_data/
