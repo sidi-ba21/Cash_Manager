@@ -1,0 +1,45 @@
+version: '3'
+services:
+  cash_manager_api:
+    image: cash_manager_api
+    container_name: cash_manager_api
+    build: 
+      context: ./servers/cash
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+  
+  bank_server_api:
+    image: bank_server_api
+    container_name: bank_server_api
+    build: 
+      context: ./servers/bank
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+
+  cash_manager_db:
+    image: postgres:latest
+    container_name: cash_manager_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=cash_manager_db
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - ./servers/cash/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    
+  bank_server_db:
+    image: postgres:latest
+    container_name: bank_server_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bank_server_db
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - ./servers/bank/db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
