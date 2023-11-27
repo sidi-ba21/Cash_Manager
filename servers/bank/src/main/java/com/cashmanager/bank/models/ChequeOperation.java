@@ -8,6 +8,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+
+@Entity
+@Table(name = "chequeOperations")
+@Getter
+@Setter
+@ToString
 public class ChequeOperation {
 
         @Id
@@ -15,28 +21,19 @@ public class ChequeOperation {
         private Long id;
 
         @Column(nullable = false)
-        private Long amount;
+        private Date issuedAt;
 
         @Column(nullable = false)
-        private String type;
-
-        @Column(nullable = false, updatable = false)
-        private Date createdAt;
+        private Date filedAt;
 
         @Column(nullable = false)
-        private Date updatedAt;
+        private Date inkedAt;
+
+        @Column(nullable = false)
+        private Long Amount;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @ManyToOne
         private BankAccount bankAccount;
 
-        public ChequeOperation() {
-        }
-
-        public ChequeOperation(Long amount, String type) {
-            this.amount = amount;
-            this.type = type;
-            this.createdAt = new Date();
-            this.updatedAt = new Date();
-        }
 }

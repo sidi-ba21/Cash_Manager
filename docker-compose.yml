@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - cash_manager_db
 
   cash_manager_db:
     image: postgres:latest
@@ -32,6 +34,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
+    depends_on:
+      - bank_server_db
 
   bank_server_db:
     image: postgres:latest

@@ -42,6 +42,10 @@ public class BankAccount {
 	private List<Transaction> transactions = new ArrayList<>();
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "bankAccount")
+	private List<ChequeOperation> chequeOperations = new ArrayList<>();
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToOne
 	private Card card;
 
