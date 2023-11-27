@@ -1,6 +1,6 @@
 package com.cashmanager.bank.models;
 
-import com.cashmanager.bank.models.enums.TransactionType;
+
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -8,13 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
-
-@Entity
-@Table(name = "transactions")
-@Getter
-@Setter
-@ToString
-public class Transaction {
+public class ChequeOperation {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +18,7 @@ public class Transaction {
         private Long amount;
 
         @Column(nullable = false)
-        @Enumerated(EnumType.STRING)
-        private TransactionType type;
+        private String type;
 
         @Column(nullable = false, updatable = false)
         private Date createdAt;
@@ -37,14 +30,13 @@ public class Transaction {
         @ManyToOne
         private BankAccount bankAccount;
 
-        public Transaction() {
+        public ChequeOperation() {
         }
 
-        public Transaction(Long amount, TransactionType type) {
+        public ChequeOperation(Long amount, String type) {
             this.amount = amount;
             this.type = type;
             this.createdAt = new Date();
             this.updatedAt = new Date();
         }
-
 }

@@ -1,69 +1,58 @@
 package com.cashmanager.bank.models;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
-import java.util.Collection;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "bank_accounts", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "number")
-})
+@Table(name = "bank_accounts")
 @Getter
 @Setter
-public class BankAccount implements Serializable {
+@ToString
+public class BankAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(unique = true)
 	private String number;
 
-	@Column(nullable = false)
+	@Column
 	private Long balance;
 
-	@Column(nullable = false, updatable = false)
-	private LocalDateTime createdAt;
+	@Column(updatable = false)
+	private Date createdAt;
 
-	@Column(nullable = false)
-	private LocalDateTime updatedAt;
+	@Column
+	private Date updatedAt;
 
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToOne(mappedBy = "bankAccount")
 	private Client client;
 
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "bankAccount")
-	private Collection<Transaction> transactions;
+	private List<Transaction> transactions = new ArrayList<>();
 
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToOne
 	private Card card;
 
-	@Override
-	public String toString() {
-		return "BankAccount{" +
-				"id=" + id +
-				", number='" + number + '\'' +
-				", balance='" + balance + '\'' +
-				", createdAt=" + createdAt +
-				", updatedAt=" + updatedAt +
-				'}';
-	}
-
 	public BankAccount() {
-		super();
 	}
 
 	public BankAccount(String number, Long balance) {
-		super();
 		this.number = number;
 		this.balance = balance;
-		this.createdAt = LocalDateTime.now();
-		this.updatedAt = LocalDateTime.now();
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
 	}
+
 }
