@@ -1,17 +1,20 @@
 package com.cashmanager.bank.models;
 
+import com.cashmanager.bank.models.enums.TransactionType;
 import jakarta.persistence.*;
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
+import lombok.ToString;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
 @Getter
 @Setter
-public class Transaction implements Serializable {
+@ToString
+public class Transaction {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,38 +24,27 @@ public class Transaction implements Serializable {
         private Long amount;
 
         @Column(nullable = false)
-        private String type;
+        @Enumerated(EnumType.STRING)
+        private TransactionType type;
 
         @Column(nullable = false, updatable = false)
-        private LocalDateTime createdAt;
+        private Date createdAt;
 
         @Column(nullable = false)
-        private LocalDateTime updatedAt;
+        private Date updatedAt;
 
-        @JsonIgnore
+        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @ManyToOne
         private BankAccount bankAccount;
 
-        @Override
-        public String toString() {
-            return "Transaction{" +
-                    "id=" + id +
-                    ", amount='" + amount + '\'' +
-                    ", type='" + type + '\'' +
-                    ", createdAt=" + createdAt +
-                    ", updatedAt=" + updatedAt +
-                    '}';
-        }
-
         public Transaction() {
-            super();
         }
 
-        public Transaction(Long amount, String type) {
-            super();
+        public Transaction(Long amount, TransactionType type) {
             this.amount = amount;
             this.type = type;
-            this.createdAt = LocalDateTime.now();
-            this.updatedAt = LocalDateTime.now();
+            this.createdAt = new Date();
+            this.updatedAt = new Date();
         }
+
 }
