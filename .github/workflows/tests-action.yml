@@ -19,9 +19,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Change directory to the project
-        run: cd servers/bank
 
       - name: All the Tests and Coverage Checks
-        run: mvn clean install
+        run: |
+        cd servers/bank 
+        mvn clean install
 
