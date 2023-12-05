@@ -21,7 +21,5 @@ jobs:
 
 
       - name: All the Tests and Coverage Checks
-        run: |
-        cd servers/bank 
-        mvn clean install
+        run: cd servers/bank ; mvn clean install
 
