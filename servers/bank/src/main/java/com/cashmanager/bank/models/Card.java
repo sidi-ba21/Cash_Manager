@@ -35,7 +35,7 @@ public class Card {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "card")
+    @OneToOne
     private BankAccount bankAccount;
 
     public Card() {

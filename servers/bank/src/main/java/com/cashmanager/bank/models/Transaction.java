@@ -2,7 +2,6 @@ package com.cashmanager.bank.models;
 
 import com.cashmanager.bank.models.enums.TransactionType;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -31,7 +30,6 @@ public class Transaction {
         @Column(nullable = false)
         private Date updatedAt;
 
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @ManyToOne
         private BankAccount bankAccount;
 

@@ -36,16 +36,13 @@ public class BankAccount {
 	@Column
 	private LocalDateTime updatedAt;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "card_number")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Card card;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "cheque_number")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Cheque cheque;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "client_id")
 	private Client client;
 
 	@OneToMany(mappedBy = "bankAccount")

@@ -1,6 +1,5 @@
 package com.cashmanager.bank.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -34,7 +33,6 @@ public class ClientAccount {
     private LocalDateTime updatedAt;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
     private Client client;
 
     public ClientAccount() {

@@ -22,10 +22,10 @@ public class Client {
 	@Column
 	private String lastName;
 
-	@OneToOne(mappedBy = "client")
+	@OneToOne
 	private ClientAccount clientAccount;
 
-	@OneToOne(mappedBy = "client")
+	@OneToOne
 	private BankAccount bankAccount;
 
 	public Client() {

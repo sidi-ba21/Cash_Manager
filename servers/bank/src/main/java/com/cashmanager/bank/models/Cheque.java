@@ -24,7 +24,7 @@ public class Cheque {
     @Column(nullable = false, updatable = false)
     private YearMonth expiredAt;
 
-    @OneToOne(mappedBy = "cheque")
+    @OneToOne
     private BankAccount bankAccount;
 
     public Cheque() {

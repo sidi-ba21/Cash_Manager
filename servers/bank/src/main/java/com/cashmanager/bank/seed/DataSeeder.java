@@ -1,7 +1,6 @@
 package com.cashmanager.bank.seed;
 
 import com.cashmanager.bank.models.BankAccount;
-import com.cashmanager.bank.models.Client;
 import com.cashmanager.bank.models.ClientAccount;
 import com.cashmanager.bank.payload.request.client.AddClientRequest;
 import com.cashmanager.bank.services.bankaccount.IBankAccountService;
@@ -40,7 +39,7 @@ public class DataSeeder implements CommandLineRunner {
 		AddClientRequest addClientRequest = new AddClientRequest(firstname, lastname, email, password);
 		ClientAccount clientAccount1 = this.clientAccountService.add(addClientRequest);
 
-		//BankAccount bankAccount = this.bankAccountService.createSeed(clientAccount1.getClient());
+		BankAccount bankAccount = this.bankAccountService.createSeed(clientAccount1.getClient());
 	}
 
 }

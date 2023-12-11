@@ -5,6 +5,9 @@ import com.cashmanager.bank.models.Card;
 import com.cashmanager.bank.models.Cheque;
 import com.cashmanager.bank.models.Client;
 import com.cashmanager.bank.utils.UString;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,15 +17,22 @@ import org.springframework.stereotype.Service;
 @Slf4j
 class BankAccountService implements IBankAccountService {
 
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	private final IBankAccountRepository bankAccountRepository;
 
+	@Transactional
 	@Override
 	public BankAccount create(Client client) {
 		String accountNumber = UString.randomNumber(BankAccount.NUMBER_LENGTH);
 		String cardNumber = UString.randomNumber(Card.NUMBER_LENGTH);
 		String chequeNumber = UString.randomNumber(Cheque.NUMBER_LENGTH);
 
+		client = entityManager.merge(client);
+
 		BankAccount bankAccount = new BankAccount(accountNumber);
+		bankAccount.setClient(client);
 
 		Card card = new Card(cardNumber, UString.randomNumber(Card.CVV_LENGTH));
 		bankAccount.setCard(card);
@@ -30,13 +40,12 @@ class BankAccountService implements IBankAccountService {
 		Cheque cheque = new Cheque(chequeNumber);
 		bankAccount.setCheque(cheque);
 
-		bankAccount.setClient(client);
-
 		log.info("Saving new bank account {}.", bankAccount);
 
 		return this.bankAccountRepository.save(bankAccount);
 	}
 
+	@Transactional
 	@Override
 	public BankAccount createSeed(Client client) {
 		String accountNumber = "0123456789";
@@ -44,15 +53,16 @@ class BankAccountService implements IBankAccountService {
 		String cardCVV = "123";
 		String chequeNumber = "0123456";
 
+		client = entityManager.merge(client);
+
 		BankAccount bankAccount = new BankAccount(accountNumber);
+		bankAccount.setClient(client);
 
 		Card card = new Card(cardNumber, cardCVV);
 		bankAccount.setCard(card);
 
 		Cheque cheque = new Cheque(chequeNumber);
 		bankAccount.setCheque(cheque);
-
-		bankAccount.setClient(client);
 
 		log.info("Saving new bank account {}.", bankAccount);
 
