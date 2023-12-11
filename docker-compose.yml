@@ -1,9 +1,8 @@
 version: '3'
 
 services:
-  cash_manager_server:
-    image: cash_manager_server
-    container_name: cash_manager_server
+  cash_server:
+    image: cash_server
     build:
       context: ./servers/cash
       dockerfile: Dockerfile
@@ -12,9 +11,8 @@ services:
     depends_on:
       - cash_manager_db
 
-  cash_manager_db:
+  cash_db:
     image: postgres:latest
-    container_name: cash_manager_db
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -28,7 +26,6 @@ services:
 
   bank_server:
     image: bank_server
-    container_name: bank_server
     build:
       context: ./servers/bank
       dockerfile: Dockerfile
@@ -37,9 +34,8 @@ services:
     depends_on:
       - bank_server_db
 
-  bank_server_db:
+  bank_db:
     image: postgres:latest
-    container_name: bank_server_db
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -50,3 +46,12 @@ services:
       - ./servers/bank/pg_data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
+
+  github_runner:
+    image: github_runner
+    build:
+      context: ./servers/runner
+      dockerfile: Dockerfile
+    environment:
+      - TOKEN=ASYVSAZU6K2OIFFKU32JPJ3FN4LDQ
+      - RUNNER_ALLOW_RUNASROOT=1
