@@ -4,17 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 
 @Entity
 @Table(name = "client_accounts")
 @Getter
-@Setter
 @ToString
 public class ClientAccount {
 

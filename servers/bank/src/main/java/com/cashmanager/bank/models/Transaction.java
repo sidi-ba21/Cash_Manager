@@ -4,7 +4,6 @@ import com.cashmanager.bank.models.enums.TransactionType;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
@@ -12,7 +11,6 @@ import java.util.Date;
 @Entity
 @Table(name = "transactions")
 @Getter
-@Setter
 @ToString
 public class Transaction {
 

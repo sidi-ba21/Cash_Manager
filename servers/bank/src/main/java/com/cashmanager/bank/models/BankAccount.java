@@ -2,12 +2,13 @@ package com.cashmanager.bank.models;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,21 +18,32 @@ import java.util.List;
 @ToString
 public class BankAccount {
 
+	public static final int NUMBER_LENGTH = 10;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(unique = true)
+	@Size(min = NUMBER_LENGTH, max = NUMBER_LENGTH)
 	private String number;
 
 	@Column
-	private Long balance;
+	private Long balance = 0L;
 
 	@Column(updatable = false)
-	private Date createdAt;
+	private LocalDateTime createdAt;
 
 	@Column
-	private Date updatedAt;
+	private LocalDateTime updatedAt;
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToOne
+	private Card card;
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToOne
+	private Cheque cheque;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToOne(mappedBy = "bankAccount")
@@ -45,18 +57,16 @@ public class BankAccount {
 	@OneToMany(mappedBy = "bankAccount")
 	private List<ChequeOperation> chequeOperations = new ArrayList<>();
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
-	private Card card;
-
 	public BankAccount() {
 	}
 
-	public BankAccount(String number, Long balance) {
+	public BankAccount(String number) {
 		this.number = number;
-		this.balance = balance;
-		this.createdAt = new Date();
-		this.updatedAt = new Date();
+		this.balance = 0L;
+
+		LocalDateTime now = LocalDateTime.now();
+		this.createdAt = now;
+		this.updatedAt = now;
 	}
 
 }

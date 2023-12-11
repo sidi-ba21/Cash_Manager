@@ -1,10 +1,8 @@
 package com.cashmanager.bank.models;
 
-
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
@@ -12,7 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "cheque_operations")
 @Getter
-@Setter
 @ToString
 public class ChequeOperation {
 
