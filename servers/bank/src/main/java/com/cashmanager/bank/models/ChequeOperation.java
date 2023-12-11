@@ -10,7 +10,7 @@ import lombok.ToString;
 import java.util.Date;
 
 @Entity
-@Table(name = "chequeOperations")
+@Table(name = "cheque_operations")
 @Getter
 @Setter
 @ToString
@@ -30,7 +30,7 @@ public class ChequeOperation {
         private Date inkedAt;
 
         @Column(nullable = false)
-        private Long Amount;
+        private Long amount;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @ManyToOne
