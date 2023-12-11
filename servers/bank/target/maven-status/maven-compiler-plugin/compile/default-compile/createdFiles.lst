@@ -1,8 +1,0 @@
-com\cashmanager\bank\controllers\TransactionController.class
-com\cashmanager\bank\services\bankaccount\IBankAccountRepository.class
-com\cashmanager\bank\models\Client.class
-com\cashmanager\bank\services\bankaccount\IBankAccountService.class
-com\cashmanager\bank\models\BankAccount.class
-com\cashmanager\bank\providers\GsonProvider.class
-com\cashmanager\bank\services\bankaccount\BankAccountService.class
-com\cashmanager\bank\BankMain.class
