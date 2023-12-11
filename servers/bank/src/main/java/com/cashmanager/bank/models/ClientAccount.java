@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "client_accounts")
 @Getter
+@Setter
 @ToString
 public class ClientAccount {
 
@@ -31,8 +33,8 @@ public class ClientAccount {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(mappedBy = "clientAccount")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private Client client;
 
     public ClientAccount() {

@@ -1,6 +1,5 @@
 package com.cashmanager.bank.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,12 +22,10 @@ public class Client {
 	@Column
 	private String lastName;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "client")
 	private ClientAccount clientAccount;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "client")
 	private BankAccount bankAccount;
 
 	public Client() {

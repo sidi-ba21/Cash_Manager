@@ -1,7 +1,6 @@
 package com.cashmanager.bank.models;
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,23 +36,21 @@ public class BankAccount {
 	@Column
 	private LocalDateTime updatedAt;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "card_number")
 	private Card card;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "cheque_number")
 	private Cheque cheque;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne(mappedBy = "bankAccount")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "bankAccount")
 	private List<Transaction> transactions = new ArrayList<>();
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "bankAccount")
 	private List<ChequeOperation> chequeOperations = new ArrayList<>();
 

@@ -1,7 +1,6 @@
 package com.cashmanager.bank.models;
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.ToString;
@@ -20,9 +19,6 @@ public class Card {
     public static final int EXPIRED_AT_YEARS = 3;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true)
     @Size(min = NUMBER_LENGTH, max = NUMBER_LENGTH)
     private String number;
@@ -39,7 +35,6 @@ public class Card {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "card")
     private BankAccount bankAccount;
 

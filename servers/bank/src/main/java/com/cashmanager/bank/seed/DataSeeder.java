@@ -2,9 +2,10 @@ package com.cashmanager.bank.seed;
 
 import com.cashmanager.bank.models.BankAccount;
 import com.cashmanager.bank.models.Client;
+import com.cashmanager.bank.models.ClientAccount;
 import com.cashmanager.bank.payload.request.client.AddClientRequest;
 import com.cashmanager.bank.services.bankaccount.IBankAccountService;
-import com.cashmanager.bank.services.client.IClientService;
+import com.cashmanager.bank.services.clientaccount.IClientAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -13,21 +14,33 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class DataSeeder implements CommandLineRunner {
 
-	private final IClientService clientService;
+	private final IClientAccountService clientAccountService;
 	private final IBankAccountService bankAccountService;
 
 	@Override
 	public void run(String... args) throws Exception {
-		if (clientService.count() > 0) {
+		if (clientAccountService.count() > 0) {
 			return;
 		}
 
-		AddClientRequest addClientRequest = new AddClientRequest("John", "DOE", "john.doe@gmail.com", "password");
-		Client client1 = this.clientService.add(addClientRequest);
+		this.createClient1();
+	}
 
-		BankAccount bankAccount = this.bankAccountService.createSeed(client1);
+	private void createClient1() {
+		String firstname = "John";
+		String lastname = "DOE";
+		String email = "john.doe@gmail.com";
+		String password = "password";
+
+		this.createClient(firstname, lastname, email, password);
+	}
 
 
+	private void createClient(String firstname, String lastname, String email, String password) {
+		AddClientRequest addClientRequest = new AddClientRequest(firstname, lastname, email, password);
+		ClientAccount clientAccount1 = this.clientAccountService.add(addClientRequest);
+
+		//BankAccount bankAccount = this.bankAccountService.createSeed(clientAccount1.getClient());
 	}
 
 }
