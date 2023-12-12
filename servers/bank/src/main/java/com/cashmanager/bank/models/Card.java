@@ -3,6 +3,7 @@ package com.cashmanager.bank.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.YearMonth;
 @Entity
 @Table(name = "cards")
 @Getter
+@Setter
 @ToString
 public class Card {
 
@@ -27,6 +29,7 @@ public class Card {
     private YearMonth expiredAt;
 
     @Column(nullable = false)
+    @Size(min = CVV_LENGTH, max = CVV_LENGTH)
     private String cvv;
 
     @Column(nullable = false, updatable = false)

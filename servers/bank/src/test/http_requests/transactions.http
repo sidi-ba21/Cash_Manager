@@ -1,0 +1,15 @@
+### Create transaction
+POST http://127.0.0.1:8081/api/v1/transactions
+Content-Type: application/json
+
+{
+  "amount": 10,
+  "type": "0",
+  "action": "0",
+  "card": {
+	"number": "0123456789012345",
+	"month": 12,
+	"year": 24,
+	"cvv": 123
+  }
+}

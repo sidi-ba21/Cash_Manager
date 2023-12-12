@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.YearMonth;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -52,6 +54,8 @@ class BankAccountService implements IBankAccountService {
 		String cardNumber = "0123456789012345";
 		String cardCVV = "123";
 		String chequeNumber = "0123456";
+		int year = 2024;
+		int month = 12;
 
 		client = entityManager.merge(client);
 
@@ -59,9 +63,11 @@ class BankAccountService implements IBankAccountService {
 		bankAccount.setClient(client);
 
 		Card card = new Card(cardNumber, cardCVV);
+		card.setExpiredAt(YearMonth.of(year, month));
 		bankAccount.setCard(card);
 
 		Cheque cheque = new Cheque(chequeNumber);
+		cheque.setExpiredAt(YearMonth.of(year, month));
 		bankAccount.setCheque(cheque);
 
 		log.info("Saving new bank account {}.", bankAccount);

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,12 +24,15 @@ public class ChequeOperation {
         private Date filedAt;
 
         @Column(nullable = false)
-        private Date inkedAt;
+        private LocalDateTime inkedAt;
 
         @Column(nullable = false)
         private Long amount;
 
         @ManyToOne
         private BankAccount bankAccount;
+
+        public ChequeOperation() {
+        }
 
 }

@@ -3,6 +3,7 @@ package com.cashmanager.bank.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.YearMonth;
@@ -10,6 +11,7 @@ import java.time.YearMonth;
 @Entity
 @Table(name = "cheques")
 @Getter
+@Setter
 @ToString
 public class Cheque {
 
