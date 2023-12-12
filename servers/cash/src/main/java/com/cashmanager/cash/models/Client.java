@@ -20,21 +20,21 @@ public class Client {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(nullable = false)
 	private String firstName;
 
-	@Column
+	@Column(nullable = false)
 	private String lastName;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne(cascade = CascadeType.ALL)
-	private Account account;
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToOne
+	private ClientAccount clientAccount;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@OneToOne(cascade = CascadeType.ALL)
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToOne
 	private Cart cart;
 
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 
