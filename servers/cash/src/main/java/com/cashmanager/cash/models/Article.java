@@ -17,21 +17,21 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
-    private Long price;
+    @Column(nullable = false)
+    private Long price = 0L;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Cart cart;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Order order;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(cascade = CascadeType.ALL)
     private Stock stock;
 

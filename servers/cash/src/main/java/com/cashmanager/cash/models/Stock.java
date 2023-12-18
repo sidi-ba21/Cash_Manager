@@ -17,10 +17,10 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private Long quantity;
+    @Column(nullable = false)
+    private Long quantity = 0L;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "stock")
     private Article article;
 

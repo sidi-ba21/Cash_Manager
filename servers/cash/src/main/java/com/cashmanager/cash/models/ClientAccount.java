@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Account {
+public class ClientAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,23 +29,25 @@ public class Account {
     private String password;
 
     @Column(nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(mappedBy = "account")
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(cascade = CascadeType.ALL)
     private Client client;
 
-    public Account() {
+    public ClientAccount() {
     }
 
-    public Account(String email, String password) {
+    public ClientAccount(String email, String password) {
         this.email = email;
         this.password = password;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
+
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
     }
 
 }

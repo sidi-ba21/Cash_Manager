@@ -1,10 +1,13 @@
 package com.cashmanager.cash.models;
 
+import com.cashmanager.cash.models.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "payments")
@@ -17,14 +20,19 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String type;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private  TransactionType type;
 
-    @Column
+    @Column(nullable = false)
     private Boolean allowed;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(mappedBy = "payment")
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(cascade = CascadeType.ALL)
     private Order order;
 
     public Payment() {
@@ -33,6 +41,9 @@ public class Payment {
     public Payment(String type, Boolean allowed) {
         this.type = type;
         this.allowed = allowed;
+
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
     }
 
 }
