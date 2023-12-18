@@ -1,18 +1,16 @@
 package com.cashmanager.bank.models;
 
+import com.cashmanager.bank.models.enums.TransactionAction;
 import com.cashmanager.bank.models.enums.TransactionType;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transactions")
 @Getter
-@Setter
 @ToString
 public class Transaction {
 
@@ -27,24 +25,30 @@ public class Transaction {
         @Enumerated(EnumType.STRING)
         private TransactionType type;
 
+        @Column(nullable = false)
+        @Enumerated(EnumType.STRING)
+        private TransactionAction action;
+
         @Column(nullable = false, updatable = false)
-        private Date createdAt;
+        private LocalDateTime createdAt;
 
         @Column(nullable = false)
-        private Date updatedAt;
+        private LocalDateTime updatedAt;
 
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @ManyToOne
         private BankAccount bankAccount;
 
         public Transaction() {
         }
 
-        public Transaction(Long amount, TransactionType type) {
+        public Transaction(Long amount, TransactionType type, TransactionAction action) {
             this.amount = amount;
             this.type = type;
-            this.createdAt = new Date();
-            this.updatedAt = new Date();
+            this.action = action;
+
+            LocalDateTime now = LocalDateTime.now();
+            this.createdAt = now;
+            this.updatedAt = now;
         }
 
 }
