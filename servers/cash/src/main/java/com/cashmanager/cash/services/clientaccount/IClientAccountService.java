@@ -15,4 +15,6 @@ public interface IClientAccountService {
     void delete(Long id);
     long count();
 
+    ClientAccount save(ClientAccount clientAccount);
+
 }
