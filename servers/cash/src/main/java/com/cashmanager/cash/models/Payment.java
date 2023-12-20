@@ -1,7 +1,6 @@
 package com.cashmanager.cash.models;
 
 import com.cashmanager.cash.models.enums.TransactionType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +37,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String type, Boolean allowed) {
+    public Payment(TransactionType type, Boolean allowed) {
         this.type = type;
         this.allowed = allowed;
 
