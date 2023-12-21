@@ -1,0 +1,30 @@
+### Create a new client
+POST http://127.0.0.1:8080/api/v1/clients
+Content-Type: application/json
+
+{
+    "firstname": "John",
+    "lastname": "Doe",
+    "email": "john.doe@gmail.com",
+    "password": "123456"
+}
+
+### Create a new client
+POST http://127.0.0.1:8080/api/v1/clients
+Content-Type: application/json
+
+{
+    "firstname": "Sidi",
+    "lastname": "BA",
+    "email": "sidi.ba@test.com",
+    "password": "123456"
+}
+
+### Get all clients
+GET http://127.0.0.1:8080/api/v1/clients
+
+### Get a client by id 1
+GET http://127.0.0.1:8080/api/v1/clients/1
+
+### Get a client by id 2
+GET http://127.0.0.1:8080/api/v1/clients/2

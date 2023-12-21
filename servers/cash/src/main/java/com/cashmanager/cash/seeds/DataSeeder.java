@@ -1,4 +1,4 @@
-package com.cashmanager.cash.seeds;
+/*package com.cashmanager.cash.seeds;
 
 import com.cashmanager.cash.models.ClientAccount;
 import com.cashmanager.cash.models.Cart;
@@ -31,7 +31,7 @@ public class DataSeeder implements CommandLineRunner {
 			return;
 		}
 		AddClientRequest addClientRequest = new AddClientRequest("John", "DOE", "john.doe@gmail.com", "password");
-		ClientAccount clientAccount1 = this.clientService.add(addClientRequest);
+			ClientAccount clientAccount1 = this.clientService.add(addClientRequest);
 
 		Cart myCart = this.cartService.create();
 		this.cartService.setClient(clientAccount1.getId(), myCart);
@@ -83,3 +83,4 @@ public class DataSeeder implements CommandLineRunner {
 	}
 
 }
+*/
