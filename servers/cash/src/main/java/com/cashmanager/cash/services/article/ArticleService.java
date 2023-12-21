@@ -1,8 +1,9 @@
 package com.cashmanager.cash.services.article;
 
-import com.cashmanager.cash.models.Article;
+import com.cashmanager.cash.models.*;
 import com.cashmanager.cash.payload.request.article.UpdateArticleRequest;
 import com.cashmanager.cash.payload.request.article.AddArticleRequest;
+import com.cashmanager.cash.services.clientaccount.IClientAccountService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,57 @@ class ArticleService implements IArticleService {
     @Autowired
     private final IArticleRepository articleRepository;
 
+    @Autowired
+    private IClientAccountService clientAccountService;
+
     @Override
     public Article add(AddArticleRequest data) {
 
-        Article article = new Article(data.getName(), data.getPrice(), data.getQuantity());
+        Article article = new Article(data.getName(), data.getPrice());
 
 //        log.info("Saving new article {}.", article);
 
         return this.articleRepository.save(article);
+    }
+
+    @Override
+    public Article setInCart(Long id, Cart cart) {
+        Article article = articleRepository.findById(id).orElse(null);
+        if (article == null) {
+            return null;
+        }
+        article.setCart(cart);
+        return articleRepository.save(article);
+    }
+
+    @Override
+    public Article removeFromCart(Long id, Cart cart) {
+        Article article = articleRepository.findById(id).orElse(null);
+        if (article == null) {
+            return null;
+        }
+        article.setCart(null);
+        return articleRepository.save(article);
+    }
+
+    @Override
+    public Article setInOrder(Long id, Order order) {
+        Article article = articleRepository.findById(id).orElse(null);
+        if (article == null) {
+            return null;
+        }
+        article.setOrder(order);
+        return articleRepository.save(article);
+    }
+
+    @Override
+    public Article removeFromOrder(Long id, Order order) {
+        Article article = articleRepository.findById(id).orElse(null);
+        if (article == null) {
+            return null;
+        }
+        article.setOrder(null);
+        return articleRepository.save(article);
     }
 
     @Override
@@ -39,6 +83,27 @@ class ArticleService implements IArticleService {
     @Override
     public List<Article> findAll() {
         return articleRepository.findAll();
+    }
+
+    @Override
+    public List<Article> getCartArticles(Long id) {
+        ClientAccount clientAccount = clientAccountService.findById(id).orElse(null);
+        if (clientAccount == null) {
+            return null;
+        }
+        Client client = clientAccount.getClient();
+        Long cartId = client.getCart().getId();
+
+        List <Article> articles = articleRepository.getCartArticles(cartId);
+
+        return articles;
+    }
+
+    @Override
+    public List<Article> getArticlesWithoutCart() {
+        List <Article> articles = articleRepository.getArticlesWithoutCart();
+
+        return articles;
     }
 
     @Override
@@ -58,10 +123,7 @@ class ArticleService implements IArticleService {
         if (data.getPrice() != null) {
             article.setPrice(data.getPrice());
         }
-        if (data.getQuantity() != null) {
-            article.setQuantity(data.getQuantity());
-        }
-        log.info("Updating article {}.", article);
+    //    log.info("Updating article {}.", article);
 
             return articleRepository.save(article);
     }

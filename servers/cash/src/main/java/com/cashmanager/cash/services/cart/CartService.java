@@ -1,13 +1,13 @@
 package com.cashmanager.cash.services.cart;
 
 import com.cashmanager.cash.models.*;
+import com.cashmanager.cash.models.enums.TransactionType;
 import com.cashmanager.cash.payload.request.article.UpdateArticleRequest;
 import com.cashmanager.cash.payload.request.cart.*;
 import com.cashmanager.cash.services.article.IArticleService;
 import com.cashmanager.cash.services.clientaccount.IClientAccountService;
-//import com.cashmanager.cash.services.order.IOrderRepository;
-//import com.cashmanager.cash.services.payment.IPaymentRepository;
-//import com.cashmanager.cash.services.client.IClientRepository;
+import com.cashmanager.cash.services.order.IOrderService;
+import com.cashmanager.cash.services.payment.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -24,21 +24,29 @@ class CartService implements ICartService {
 
     private ICartRepository cartRepository;
 
-//    @Autowired
-//    private IOrderRepository orderRepository;
-//    @Autowired
-//    private IPaymentRepository paymentRepository;
-//    @Autowired
-//    private IClientRepository clientRepository;
+    private IOrderService orderService;
 
     private IArticleService articleService;
 
     private IClientAccountService clientAccountService;
 
+    private IPaymentService paymentService;
+
 
     @Override
     public Cart create() {
         Cart cart = new Cart();
+        return cartRepository.save(cart);
+    }
+
+    @Override
+    public Cart setClient(Long id, Cart cart) {
+        ClientAccount clientAccount = clientAccountService.findById(id).orElse(null);
+        if (clientAccount == null) {
+            return null;
+        }
+        Client client = clientAccount.getClient();
+        cart.setClient(client);
         return cartRepository.save(cart);
     }
 
@@ -55,19 +63,16 @@ class CartService implements ICartService {
 
         Article article = articleService.findById(data.getArticle_id()).orElse(null);
 
-        List <Article> articles = cart.getArticles();
+        List <Article> articles = this.articleService.getCartArticles(id);
 
         if (article == null) {
             return null;
         }
 
         articles.add(article);
-        article.setQuantity(article.getQuantity() - 1);
-        articleService.update(article.getId(), new UpdateArticleRequest(article.getName(), article.getPrice(), article.getQuantity()));
+        articleService.setInCart(article.getId(), cart);
         cart.setArticles(articles);
-//        client.setCart(cart);
-//        clientRepository.save(client);
-//        clientAccountService.update(clientAccount.getId(), new UpdateClientRequest());
+
 
         return cartRepository.save(cart);
     }
@@ -88,16 +93,15 @@ class CartService implements ICartService {
             return;
         }
 
-        List <Article> articles = cart.getArticles();
+        List <Article> articles = articleService.getCartArticles(id);
 
-//        articles.remove(article);
-//        article.setQuantity(article.getQuantity() + 1);
-//        articleService.update(article.getId(), new UpdateArticleRequest(article.getName(), article.getPrice(), article.getQuantity()));
-//        cart.setArticles(articles);
-//        client.setCart(cart);
-//        clientAccount.setClient(client);
-//        clientRepository.save(client);
-//        clientAccountService.update(clientAccount.getId(), new UpdateClientRequest());
+        if (articles.isEmpty()) {
+            return;
+        }
+
+        articles.remove(article);
+        articleService.removeFromCart(article.getId(), cart);
+        cart.setArticles(articles);
         cartRepository.save(cart);
     }
 
@@ -117,41 +121,29 @@ class CartService implements ICartService {
         if (clientAccount == null) {
             return null;
         }
-
         Client client = clientAccount.getClient();
-
-        Cart cart = client.getCart();
-
-        List<Article> articles = cart.getArticles();
+        Long cartId = client.getCart().getId();
+        List <Article> articles = articleService.getCartArticles(cartId);
 
         if (articles.isEmpty()) {
             return null;
         }
 
-        Long totalPrice = 0L;
+        Order order = orderService.add(articles);
 
-        for (Article article : articles) {
-            totalPrice += article.getPrice();
+        Payment payment = paymentService.add(data);
+
+        if (payment == null || order == null) {
+            return null;
         }
 
-        Order order = new Order(totalPrice);
-//
-//        order.setClient(client);
-//        order.setArticles(articles);
-//        TransactionType type = TransactionType.valueOf(data.getTypePayment());
-//        Payment payment = new Payment(type, true);
-//        payment.setOrder(order);
-//
-//        order.setPayment(payment);
-//        client.getOrders().add(order);
-//        orderRepository.save(order);
-//        paymentRepository.save(payment);
-//        clientAccount.setClient(client);
-//        clientRepository.save(client);
-//        clientAccountService.update(clientAccount.getId(), new UpdateClientRequest());
-//
-//        cart.setArticles(null);
-//        cartRepository.save(cart);
+        order = orderService.setClient(order.getId(), client);
+        order = orderService.validateOrder(order.getId(), payment);
+        paymentService.setOrder(payment.getId(), order);
+
+        for (Article article : articles) {
+            articleService.setInOrder(article.getId(), order);
+        }
 
         return order;
     }

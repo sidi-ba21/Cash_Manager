@@ -52,6 +52,17 @@ class ClientAccountService implements IClientAccountService {
 	}
 
 	@Override
+	public void setCart(Long id, Cart cart) {
+		ClientAccount clientAccount = clientAccountRepository.findById(id).orElse(null);
+		if (clientAccount == null) {
+			return;
+		}
+		Client client = clientAccount.getClient();
+		clientService.setCart(client.getId(), cart);
+		clientAccount.setClient(client);
+	}
+
+	@Override
     public Optional<ClientAccount> findById(Long id) {
         return clientAccountRepository.findById(id);
     }

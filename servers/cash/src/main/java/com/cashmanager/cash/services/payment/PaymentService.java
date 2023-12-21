@@ -1,6 +1,8 @@
 package com.cashmanager.cash.services.payment;
 
+import com.cashmanager.cash.models.Order;
 import com.cashmanager.cash.models.Payment;
+import com.cashmanager.cash.payload.request.cart.ValidateCartRequest;
 import com.cashmanager.cash.services.payment.IPaymentService;
 import com.cashmanager.cash.services.payment.IPaymentRepository;
 import com.cashmanager.cash.models.enums.TransactionType;
@@ -20,15 +22,26 @@ class PaymentService implements IPaymentService {
     private final IPaymentRepository paymentRepository;
 
     @Override
-    public Payment add(String typePayment) {
+    public Payment add(ValidateCartRequest data) {
         // TODO : Validate data
-        TransactionType type = TransactionType.valueOf(typePayment);
+        TransactionType type = TransactionType.valueOf(data.getTypePayment());
+        Boolean allowed = data.getAllowed();
 
-        Payment payment = new Payment(type, true);
+        Payment payment = new Payment(type, allowed);
 
-        log.info("Saving new payment {}.", payment);
+//        log.info("Saving new payment {}.", payment);
 
         return this.paymentRepository.save(payment);
+    }
+
+    @Override
+    public void setOrder(Long id, Order order) {
+        Payment payment = paymentRepository.findById(id).orElse(null);
+        if (payment == null) {
+            return;
+        }
+        payment.setOrder(order);
+        paymentRepository.save(payment);
     }
 
     @Override
@@ -37,15 +50,20 @@ class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Payment update(Long id, String typePayment) {
-        TransactionType type = TransactionType.valueOf(typePayment);
+    public Payment update(Long id, ValidateCartRequest data) {
         Payment payment = paymentRepository.findById(id).orElse(null);
 
         if (payment == null) {
             return null;
         }
-        payment.setType(type);
-        log.info("Updating payment {}.", payment);
+        if (data.getAllowed() != null) {
+            payment.setAllowed(data.getAllowed());
+        }
+        if (data.getTypePayment() != null) {
+            payment.setType(TransactionType.valueOf(data.getTypePayment()));
+        }
+
+        //    log.info("Updating payment {}.", payment);
         return paymentRepository.save(payment);
     }
 
@@ -55,7 +73,7 @@ class PaymentService implements IPaymentService {
         if (payment == null) {
             return;
         }
-        log.info("Deleting payment {}.", payment);
+      //  log.info("Deleting payment {}.", payment);
         paymentRepository.delete(payment);
     }
 

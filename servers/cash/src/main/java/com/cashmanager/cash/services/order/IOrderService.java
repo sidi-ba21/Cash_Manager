@@ -1,6 +1,7 @@
 package com.cashmanager.cash.services.order;
 
 import com.cashmanager.cash.models.Article;
+import com.cashmanager.cash.models.Client;
 import com.cashmanager.cash.models.Order;
 import com.cashmanager.cash.models.Payment;
 
@@ -24,5 +25,7 @@ public interface IOrderService {
 
     long count();
 
+    Order setClient(Long id, Client client);
+    
     Order validateOrder(Long id, Payment payment);
 }

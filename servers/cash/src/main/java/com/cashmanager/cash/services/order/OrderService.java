@@ -1,6 +1,7 @@
 package com.cashmanager.cash.services.order;
 
 import com.cashmanager.cash.models.Article;
+import com.cashmanager.cash.models.Client;
 import com.cashmanager.cash.models.Order;
 import com.cashmanager.cash.models.Payment;
 import com.cashmanager.cash.services.order.IOrderRepository;
@@ -36,9 +37,19 @@ class OrderService implements IOrderService {
         Order order = new Order(totalPrice);
         order.setArticles(articles);
 
-        log.info("Saving new order {}.", order);
+      //  log.info("Saving new order {}.", order);
 
         return this.orderRepository.save(order);
+    }
+
+    @Override
+    public Order setClient(Long id, Client client) {
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order == null) {
+            return null;
+        }
+        order.setClient(client);
+        return orderRepository.save(order);
     }
 
     @Override
@@ -88,8 +99,6 @@ class OrderService implements IOrderService {
         if (order == null) {
             return null;
         }
-        payment.setOrder(order);
-        paymentService.save(payment);
         order.setPayment(payment);
         return orderRepository.save(order);
     }

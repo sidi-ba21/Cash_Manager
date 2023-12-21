@@ -31,6 +31,8 @@ public class ClientAccount {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    // how to upate this field automatically when one of the fields is updated?
+    //@Column(nullable = false, updatable = true, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 

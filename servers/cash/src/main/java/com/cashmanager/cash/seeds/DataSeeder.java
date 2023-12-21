@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 
 @Service
@@ -33,11 +34,8 @@ public class DataSeeder implements CommandLineRunner {
 		ClientAccount clientAccount1 = this.clientService.add(addClientRequest);
 
 		Cart myCart = this.cartService.create();
-		myCart.setClient(clientAccount1.getClient());
-		clientAccount1.getClient().setCart(myCart);
-		this.cartService.save(myCart);
-		this.clientService.save(clientAccount1);
-
+		this.cartService.setClient(clientAccount1.getId(), myCart);
+		this.clientService.setCart(clientAccount1.getId(), myCart);
 
 		AddArticleRequest addArticleRequest = new AddArticleRequest("Article 1", 10L, 10L);
 		Article article1 = this.articleService.add(addArticleRequest);
@@ -56,25 +54,30 @@ public class DataSeeder implements CommandLineRunner {
 		// print all articles in the cart
 		Cart actualCart = this.cartService.findById(clientAccount1.getId()).orElse(null);
 		if (actualCart != null) {
-			for (Article article : actualCart.getArticles()) {
-				log.info("Article in cart : {}", article);
+			 List<Article> articles = articleService.getCartArticles(clientAccount1.getId());
+			if (articles != null) {
+				log.info("Cart articles : " + articles.size());
+				//log.info("cart articles : {}", articles);
+			}
+			else {
+				log.info("Cart articles : null");
 			}
 		}
 		else {
-			log.info("Cart articles : null");
+			log.info("Cart is : null");
 		}
-//
-//		UpdateArticleRequest updateArticleRequest = new UpdateArticleRequest("Article 1", 15L, 15L);
-//		Article article3 = this.articleService.update(article1.getId(), updateArticleRequest);
-//
-//		UpdateClientRequest updateClientRequest = new UpdateClientRequest("John", "DOE", "doe.john@gmail.com", "123456");
-//		ClientAccount clientAccount2 = this.clientService.update(clientAccount1.getId(), updateClientRequest);
-//
-//		DeleteItemCartRequest deleteItemCartRequest = new DeleteItemCartRequest(article1.getId());
-//		this.cartService.delete(clientAccount1.getId(), deleteItemCartRequest);
-//
-//		ValidateCartRequest validateCartRequest = new ValidateCartRequest("CARD");
-//		this.cartService.validateCart(clientAccount1.getId(), validateCartRequest);
+
+		UpdateArticleRequest updateArticleRequest = new UpdateArticleRequest("Article 1", 15L, 15L);
+		Article article3 = this.articleService.update(article1.getId(), updateArticleRequest);
+
+		UpdateClientRequest updateClientRequest = new UpdateClientRequest("John", "DOE", "doe.john@gmail.com", "123456");
+		ClientAccount clientAccount2 = this.clientService.update(clientAccount1.getId(), updateClientRequest);
+
+		DeleteItemCartRequest deleteItemCartRequest = new DeleteItemCartRequest(article1.getId());
+		this.cartService.delete(clientAccount1.getId(), deleteItemCartRequest);
+
+		ValidateCartRequest validateCartRequest = new ValidateCartRequest("CARD", true);
+		this.cartService.validateCart(clientAccount1.getId(), validateCartRequest);
 
 
 	}

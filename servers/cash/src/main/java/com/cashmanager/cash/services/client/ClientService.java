@@ -1,5 +1,6 @@
 package com.cashmanager.cash.services.client;
 
+import com.cashmanager.cash.models.Cart;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.cashmanager.cash.services.client.IClientRepository;
@@ -26,6 +27,16 @@ class ClientService implements IClientService {
      //   log.info("Saving new client {}.", client);
 
         return this.clientRepository.save(client);
+    }
+
+    @Override
+    public Client setCart(Long id, Cart cart) {
+        Client client = clientRepository.findById(id).orElse(null);
+        if (client == null) {
+            return null;
+        }
+        client.setCart(cart);
+        return clientRepository.save(client);
     }
 
     @Override

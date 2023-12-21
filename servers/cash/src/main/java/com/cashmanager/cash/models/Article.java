@@ -23,8 +23,6 @@ public class Article {
     @Column(nullable = false)
     private Long price = 0L;
 
-    @Column(nullable = false)
-    private Long quantity = 0L;
 
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
@@ -38,10 +36,8 @@ public class Article {
     public Article() {
     }
 
-    public Article(String name, Long price, Long quantity) {
+    public Article(String name, Long price) {
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
-
     }
 }
