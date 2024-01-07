@@ -16,6 +16,8 @@ public interface IOrderService {
 
     List<Order> findAll();
 
+    List<Order> findAllById(Long id);
+
     Order update(Long id, List<Article> articles);
 
     Order save(Order order);

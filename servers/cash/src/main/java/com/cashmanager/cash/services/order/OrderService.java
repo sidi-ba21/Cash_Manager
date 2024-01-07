@@ -63,6 +63,11 @@ class OrderService implements IOrderService {
     }
 
     @Override
+    public List<Order> findAllById(Long id) {
+        return orderRepository.findAllClientOrder(id);
+    }
+
+    @Override
     public Order update(Long id, List<Article> articles) {
         Order order = orderRepository.findById(id).orElse(null);
         Long totalPrice = 0L;

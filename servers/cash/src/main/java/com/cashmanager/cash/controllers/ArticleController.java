@@ -4,14 +4,14 @@ import com.cashmanager.cash.payload.request.article.*;
 import com.cashmanager.cash.payload.response.article.*;
 import com.cashmanager.cash.services.article.IArticleService;
 import com.cashmanager.cash.models.Article;
-    import lombok.AllArgsConstructor;
-    import lombok.extern.slf4j.Slf4j;
-    import org.springframework.http.HttpStatus;
-    import org.springframework.http.ResponseEntity;
-    import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-    import java.util.ArrayList;
-    import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
