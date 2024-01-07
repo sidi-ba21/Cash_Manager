@@ -1,4 +1,4 @@
-package com.cashmanager.bank.controllers.api;
+package com.cashmanager.bank.controllers.api.v1;
 
 import com.cashmanager.bank.payload.request.client.CreateTransactionRequest;
 import com.cashmanager.bank.payload.response.CreateTransactionResponse;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/transactions")
+@RequestMapping(value = "api/v1/transactions")
 @AllArgsConstructor
 @Slf4j
 public class TransactionController {
@@ -25,11 +25,13 @@ public class TransactionController {
 		CreateTransactionResponse response = new CreateTransactionResponse();
 
 		try {
-
-			log.info(ctr.toString());
-
+			this.transactionService.create(ctr);
+			response.setMessage("Transaction successfully created.");
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			String message = e.getMessage();
+			response.setMessage(message);
+			log.error(message);
 		}
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);

@@ -4,6 +4,7 @@ import com.cashmanager.bank.models.enums.TransactionAction;
 import com.cashmanager.bank.models.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "transactions")
 @Getter
-@ToString
+@Setter
 public class Transaction {
 
         @Id

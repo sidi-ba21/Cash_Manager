@@ -13,7 +13,6 @@ import java.time.YearMonth;
 @Table(name = "cards")
 @Getter
 @Setter
-@ToString
 public class Card {
 
     public static final int NUMBER_LENGTH = 16;
@@ -21,6 +20,9 @@ public class Card {
     public static final int EXPIRED_AT_YEARS = 3;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(unique = true)
     @Size(min = NUMBER_LENGTH, max = NUMBER_LENGTH)
     private String number;
