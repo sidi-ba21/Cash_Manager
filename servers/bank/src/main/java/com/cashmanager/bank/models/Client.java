@@ -9,7 +9,6 @@ import lombok.ToString;
 @Table(name = "clients")
 @Getter
 @Setter
-@ToString
 public class Client {
 
 	@Id
@@ -21,12 +20,6 @@ public class Client {
 
 	@Column
 	private String lastName;
-
-	@OneToOne
-	private ClientAccount clientAccount;
-
-	@OneToOne
-	private BankAccount bankAccount;
 
 	public Client() {
 	}

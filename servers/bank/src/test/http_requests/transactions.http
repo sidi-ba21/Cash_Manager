@@ -1,15 +1,38 @@
-### Create transaction
+### Create card transaction
 POST http://127.0.0.1:8081/api/v1/transactions
 Content-Type: application/json
 
 {
+  "type": "CARD",
+  "action": "RETRIEVE",
   "amount": 10,
-  "type": "0",
-  "action": "0",
   "card": {
-	"number": "0123456789012345",
-	"month": 12,
-	"year": 24,
-	"cvv": 123
+    "number": "0123456789012345",
+    "month": 12,
+    "year": 24,
+    "cvv": "123"
+  }
+}
+
+### Create cheque transaction
+POST http://127.0.0.1:8081/api/v1/transactions
+Content-Type: application/json
+
+{
+  "type": "CHEQUE",
+  "action": "RETRIEVE",
+  "amount": 10,
+  "cheque": {
+    "number": "0123456",
+    "month": 12,
+    "year": 24,
+    "location": "Paris",
+    "issuedAt": "2024-01-10T10:30:00",
+    "filedAt": "2022-04-10T11:45:00",
+    "inkedAt": "2022-04-10T12:30:00"
+  },
+  "admin": {
+    "login": "admin01",
+    "password": "password"
   }
 }

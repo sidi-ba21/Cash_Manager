@@ -12,13 +12,15 @@ import java.time.YearMonth;
 @Table(name = "cheques")
 @Getter
 @Setter
-@ToString
 public class Cheque {
 
     public static final int NUMBER_LENGTH = 7;
     public static final int EXPIRED_AT_YEARS = 3;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(nullable = false, unique = true)
     @Size(min = 7, max = 7)
     private String number;

@@ -14,7 +14,6 @@ import java.util.List;
 @Table(name = "bank_accounts")
 @Getter
 @Setter
-@ToString
 public class BankAccount {
 
 	public static final int NUMBER_LENGTH = 10;

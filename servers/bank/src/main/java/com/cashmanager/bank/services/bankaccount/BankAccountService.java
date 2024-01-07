@@ -37,9 +37,11 @@ class BankAccountService implements IBankAccountService {
 		bankAccount.setClient(client);
 
 		Card card = new Card(cardNumber, UString.randomNumber(Card.CVV_LENGTH));
+		card.setBankAccount(bankAccount);
 		bankAccount.setCard(card);
 
 		Cheque cheque = new Cheque(chequeNumber);
+		cheque.setBankAccount(bankAccount);
 		bankAccount.setCheque(cheque);
 
 		log.info("Saving new bank account {}.", bankAccount);
@@ -56,23 +58,38 @@ class BankAccountService implements IBankAccountService {
 		String chequeNumber = "0123456";
 		int year = 2024;
 		int month = 12;
+		long balance = 100;
 
 		client = entityManager.merge(client);
 
 		BankAccount bankAccount = new BankAccount(accountNumber);
+		bankAccount.setBalance(balance);
 		bankAccount.setClient(client);
 
 		Card card = new Card(cardNumber, cardCVV);
 		card.setExpiredAt(YearMonth.of(year, month));
+		card.setBankAccount(bankAccount);
 		bankAccount.setCard(card);
 
 		Cheque cheque = new Cheque(chequeNumber);
 		cheque.setExpiredAt(YearMonth.of(year, month));
+		cheque.setBankAccount(bankAccount);
 		bankAccount.setCheque(cheque);
 
 		log.info("Saving new bank account {}.", bankAccount);
 
 		return this.bankAccountRepository.save(bankAccount);
+	}
+
+	@Override
+	public void retrieve(BankAccount account, long amount) {
+		account.setBalance(account.getBalance() - amount);
+		this.bankAccountRepository.save(account);
+	}
+
+	@Override
+	public boolean canRetrieve(BankAccount account, long amount) {
+		return account.getBalance() < amount;
 	}
 
 

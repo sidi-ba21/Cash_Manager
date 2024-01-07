@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Table(name = "client_accounts")
 @Getter
 @Setter
-@ToString
 public class ClientAccount {
 
     @Id
