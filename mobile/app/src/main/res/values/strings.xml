@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Cash Manager</string>
 
-    <!-- Page login-->
+    <!-- Page login -->
     <string name="login_label_1">Email</string>
     <string name="login_placeholder_1">example@gmail.com</string>
     <string name="login_label_2">Mot de passe</string>
@@ -10,4 +10,16 @@
     <string name="login_remember_me">Se souvenir de moi</string>
     <string name="login_submit_login">Connexion</string>
 
+    <!-- bottom navigation -->
+    <string name="bottom_home_item">Home</string>
+    <string name="bottom_credit_item">Credit</string>
+    <string name="bottom_scan_item">Scan</string>
+    <string name="bottom_shopping_item">shopping</string>
+
+    <!-- home page -->
+    <string name="history_home_transactions">historique des transactions</string>
+    <string name="shopping">Pagnier 1</string>
+    <string name="course">course</string>
+    <string name="total">- $144.00</string>
+    <string name="date">19 Dec 2023</string>
 </resources>
