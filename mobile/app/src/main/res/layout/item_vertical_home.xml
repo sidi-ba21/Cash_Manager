@@ -32,7 +32,7 @@
     </androidx.cardview.widget.CardView>
 
     <View
-        android:id="@+id/view_separation"
+        android:id="@+id/view_separation_home"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,41 +40,41 @@
         />
 
     <TextView
-        android:id="@+id/name_shopping"
+        android:id="@+id/name_shopping_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="@string/shopping"
-        app:layout_constraintBottom_toTopOf="@+id/view_separation"
+        app:layout_constraintBottom_toTopOf="@+id/view_separation_home"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         android:textColor="@color/white"/>
 
     <TextView
-        android:id="@+id/name_course"
+        android:id="@+id/name_course_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="@string/course"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/view_separation"
+        app:layout_constraintTop_toBottomOf="@+id/view_separation_home"
         android:textColor="@color/gray"/>
 
     <TextView
-        android:id="@+id/name_total"
+        android:id="@+id/name_total_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/total"
-        app:layout_constraintBottom_toTopOf="@+id/view_separation"
+        app:layout_constraintBottom_toTopOf="@+id/view_separation_home"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/secondary"/>
 
     <TextView
-        android:id="@+id/name_date"
+        android:id="@+id/name_date_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_separation"
+        app:layout_constraintTop_toBottomOf="@+id/view_separation_home"
         android:textColor="@color/gray"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

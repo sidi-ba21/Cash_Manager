@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp"
+    android:paddingTop="15dp"
+    android:layout_marginBottom="20dp"
+    android:background="@color/bg_secondary">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_secondary"
+            android:src="@drawable/kinder" />
+
+    </androidx.cardview.widget.CardView>
+    <View
+        android:id="@+id/view_separation_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/name_product_shopping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/name_product_shopping"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/view_separation_shopping"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/price_product_shopping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/price_product_shopping"
+        android:textColor="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/view_separation_shopping" />
+
+    <TextView
+        android:id="@+id/product_shopping_least"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_shopping_least"
+        android:layout_marginEnd="70dp"
+        android:textColor="@color/white"
+        android:paddingBottom="1dp"
+        android:paddingTop="1dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+    <TextView
+        android:id="@+id/product_shopping_number"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_shopping_number"
+        android:layout_marginEnd="40dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+    <TextView
+        android:id="@+id/product_shopping_more"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_shopping_more"
+        android:paddingBottom="1dp"
+        android:paddingTop="1dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@color/secondary"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

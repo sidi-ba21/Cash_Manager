@@ -22,4 +22,14 @@
     <string name="course">course</string>
     <string name="total">- $144.00</string>
     <string name="date">19 Dec 2023</string>
+
+    <!-- shopping page -->
+    <string name="regler">Régler</string>
+    <string name="price">Prix :</string>
+    <string name="name_product_shopping">Kinder boueno white</string>
+    <string name="price_product_shopping">8€</string>
+    <string name="product_shopping_least">-</string>
+    <string name="product_shopping_number">1</string>
+    <string name="product_shopping_more">+</string>
+
 </resources>

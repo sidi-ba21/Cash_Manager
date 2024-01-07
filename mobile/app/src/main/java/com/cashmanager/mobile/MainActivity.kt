@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cashmanager.mobile.fragments.AuthenticationFragment
 import com.cashmanager.mobile.fragments.HomeFragment
+import com.cashmanager.mobile.fragments.ShoppingFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,8 +19,12 @@ class MainActivity : AppCompatActivity() {
 //        transaction.addToBackStack(null)
 //        transaction.commit()
 
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.replace(R.id.fragment_container, HomeFragment())
+//        transaction.addToBackStack(null)
+//        transaction.commit()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, HomeFragment())
+        transaction.replace(R.id.fragment_container, ShoppingFragment())
         transaction.addToBackStack(null)
         transaction.commit()
     }
