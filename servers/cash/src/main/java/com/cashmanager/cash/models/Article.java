@@ -23,6 +23,7 @@ public class Article {
     @Column(nullable = false)
     private Long price = 0L;
 
+
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Cart cart;
@@ -31,9 +32,6 @@ public class Article {
     @ManyToOne
     private Order order;
 
-   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(cascade = CascadeType.ALL)
-    private Stock stock;
 
     public Article() {
     }
