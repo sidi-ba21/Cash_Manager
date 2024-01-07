@@ -5,10 +5,8 @@ import com.cashmanager.cash.models.Client;
 import com.cashmanager.cash.models.Order;
 import com.cashmanager.cash.models.Payment;
 import com.cashmanager.cash.services.order.IOrderRepository;
-import com.cashmanager.cash.services.payment.IPaymentService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +16,9 @@ import java.util.Optional;
 @Slf4j
 class OrderService implements IOrderService {
 
-    @Autowired
+
     private final IOrderRepository orderRepository;
 
-    @Autowired
-    private final IPaymentService paymentService;
 
     @Override
     public Order add(List<Article> articles) {
