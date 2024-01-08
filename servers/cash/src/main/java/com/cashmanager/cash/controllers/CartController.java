@@ -42,7 +42,7 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CartResponse> get(@RequestParam Long id) {
+    public ResponseEntity<CartResponse> get(@PathVariable Long id) {
         log.info("get cart by client id : " + id);
         CartResponse response = new CartResponse();
 

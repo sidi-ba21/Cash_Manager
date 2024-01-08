@@ -1,5 +1,5 @@
 ### ADD ARTICLES TO THE CART
-POST http://127.0.0.1:8080/api/v1/cart/add
+POST http://127.0.0.1:8080/api/v1/carts/add
 Content-Type: application/json
 
 {
@@ -7,7 +7,15 @@ Content-Type: application/json
 }
 
 ### ADD ARTICLES TO THE CART
-POST http://127.0.0.1:8080/api/v1/cart/add
+POST http://127.0.0.1:8080/api/v1/carts/add
+Content-Type: application/json
+
+{
+  "articleId": 15
+}
+
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/carts/add
 Content-Type: application/json
 
 {
@@ -15,15 +23,7 @@ Content-Type: application/json
 }
 
 ### ADD ARTICLES TO THE CART
-POST http://127.0.0.1:8080/api/v1/cart/add
-Content-Type: application/json
-
-{
-  "articleId": 1
-}
-
-### ADD ARTICLES TO THE CART
-POST http://127.0.0.1:8080/api/v1/cart/add
+POST http://127.0.0.1:8080/api/v1/carts/add
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ### ADD ARTICLES TO THE CART
-POST http://127.0.0.1:8080/api/v1/cart/add
+POST http://127.0.0.1:8080/api/v1/carts/add
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ### ADD ARTICLES TO THE CART
-POST http://127.0.0.1:8080/api/v1/cart/add
+POST http://127.0.0.1:8080/api/v1/carts/add
 Content-Type: application/json
 
 {
@@ -47,7 +47,7 @@ Content-Type: application/json
 }
 
 ### REMOVE ARTICLES FROM THE CART
-POST http://127.0.0.1:8080/api/v1/cart/remove
+POST http://127.0.0.1:8080/api/v1/carts/remove
 Content-Type: application/json
 
 {
@@ -55,10 +55,10 @@ Content-Type: application/json
 }
 
 ### GET CART CLIENT ID
-GET http://127.0.0.1:8080/api/v1/cart/1
+GET http://127.0.0.1:8080/api/v1/carts/1
 
 ### VALIDATE CART
-POST http://127.0.0.1:8080/api/v1/cart/validate
+POST http://127.0.0.1:8080/api/v1/carts/validate
 Content-Type: application/json
 
 {

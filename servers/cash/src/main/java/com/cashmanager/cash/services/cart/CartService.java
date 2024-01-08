@@ -55,6 +55,7 @@ class CartService implements ICartService {
 
         ClientAccount clientAccount = clientAccountService.findById(id).orElse(null);
         if (clientAccount == null) {
+            log.info("client account is null");
             return null;
         }
         Client client = clientAccount.getClient();
@@ -66,6 +67,7 @@ class CartService implements ICartService {
         List <Article> articles = this.articleService.getCartArticles(id);
 
         if (article == null) {
+            log.info("article is null");
             return null;
         }
 

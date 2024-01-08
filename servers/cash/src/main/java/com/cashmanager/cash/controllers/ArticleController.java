@@ -41,7 +41,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleResponse> get(@RequestParam Long id) {
+    public ResponseEntity<ArticleResponse> get(@PathVariable Long id) {
         log.info("get article by id : " + id);
         ArticleResponse response = new ArticleResponse();
 
@@ -101,7 +101,7 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ArticleResponse> update(@RequestParam Long id, @RequestBody UpdateArticleRequest data) {
+    public ResponseEntity<ArticleResponse> update(@PathVariable Long id, @RequestBody UpdateArticleRequest data) {
         ArticleResponse response = new ArticleResponse();
 
         try {
@@ -120,7 +120,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ArticleResponse> delete(@RequestParam Long id) {
+    public ResponseEntity<ArticleResponse> delete(@PathVariable Long id) {
         ArticleResponse response = new ArticleResponse();
 
         try {

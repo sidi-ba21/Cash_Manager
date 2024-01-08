@@ -3,6 +3,7 @@ package com.cashmanager.cash.services.clientaccount;
 import com.cashmanager.cash.models.Cart;
 import com.cashmanager.cash.models.Client;
 import com.cashmanager.cash.models.ClientAccount;
+import com.cashmanager.cash.payload.request.client.LoginRequest;
 import com.cashmanager.cash.services.cart.ICartService;
 import com.cashmanager.cash.services.client.IClientService;
 import com.cashmanager.cash.services.clientaccount.IClientAccountRepository;
@@ -27,6 +28,10 @@ class ClientAccountService implements IClientAccountService {
 
 	private final IClientService clientService;
 
+	@Override
+	public ClientAccount login(LoginRequest data) {
+		return clientAccountRepository.login(data.getEmail(), data.getPassword());
+	}
 
 	@Override
 	public ClientAccount add(AddClientRequest data) {
