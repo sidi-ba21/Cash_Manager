@@ -42,12 +42,12 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CartResponse> get(@RequestParam Long id) {
+    public ResponseEntity<CartResponse> get(@PathVariable Long id) {
         log.info("get cart by client id : " + id);
         CartResponse response = new CartResponse();
 
         try {
-            Cart cart = cartService.findById(1L).orElse(null);
+            Cart cart = cartService.findById(id).orElse(null);
             if (cart == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }

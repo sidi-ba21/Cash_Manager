@@ -1,9 +1,11 @@
 package com.cashmanager.cash.controllers;
 
 import com.cashmanager.cash.models.ClientAccount;
+import com.cashmanager.cash.models.Cart;
 import com.cashmanager.cash.payload.request.client.*;
 import com.cashmanager.cash.payload.response.client.ClientResponse;
 import com.cashmanager.cash.services.clientaccount.IClientAccountService;
+import com.cashmanager.cash.services.cart.ICartService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class ClientController {
     private final IClientAccountService clientAccountService;
+    private final ICartService cartService;
 
     @PostMapping
     public ResponseEntity<ClientResponse> add(@RequestBody AddClientRequest data) {
@@ -27,6 +30,9 @@ public class ClientController {
 
         try {
             ClientAccount clientAccount = clientAccountService.add(data);
+            Cart cart = cartService.create();
+            cartService.setClient(clientAccount.getId(), cart);
+            clientAccountService.setCart(clientAccount.getId(), cart);
             responseBody(response, clientAccount);
 
         } catch (Exception e) {
@@ -37,7 +43,7 @@ public class ClientController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ClientResponse> get(@RequestParam Long id) {
+    public ResponseEntity<ClientResponse> get(@PathVariable Long id) {
         log.info("get client by id : " + id);
         ClientResponse response = new ClientResponse();
 
@@ -57,7 +63,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClientResponse> update(@RequestParam Long id, @RequestBody UpdateClientRequest data) {
+    public ResponseEntity<ClientResponse> update(@PathVariable Long id, @RequestBody UpdateClientRequest data) {
         ClientResponse response = new ClientResponse();
 
         try {
@@ -76,7 +82,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ClientResponse> delete(@RequestParam Long id) {
+    public ResponseEntity<ClientResponse> delete(@PathVariable Long id) {
         ClientResponse response = new ClientResponse();
 
         try {

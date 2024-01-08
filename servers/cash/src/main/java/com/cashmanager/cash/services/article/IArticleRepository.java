@@ -8,10 +8,10 @@ import java.util.List;
 
 interface IArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("SELECT a FROM Article a WHERE a.cart.id = :id")
+    @Query("SELECT a FROM Article a WHERE a.cart.id = :id AND a.order = null")
     List<Article> getCartArticles(@Param("id") Long id);
 
-    @Query("SELECT a FROM Article a WHERE a.cart.id = null")
+    @Query("SELECT a FROM Article a WHERE a.cart = null AND a.order = null")
     List<Article> getArticlesWithoutCart();
 
     // get count of articles whithout cart, has same name and price return list of articles contains name and price and the count

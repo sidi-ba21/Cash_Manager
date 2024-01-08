@@ -23,7 +23,7 @@ public class OrderController {
     private final IOrderService orderService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderResponse> get(@RequestParam Long id) {
+    public ResponseEntity<OrderResponse> get(@PathVariable Long id) {
         log.info("get order by id : " + id);
         OrderResponse response = new OrderResponse();
 
@@ -42,7 +42,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/allorders")
+    @GetMapping
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
         log.info("get all orders");
         List<OrderResponse> responses = new ArrayList<>();

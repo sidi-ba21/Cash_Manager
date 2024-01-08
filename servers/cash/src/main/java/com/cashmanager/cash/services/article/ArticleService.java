@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,6 +96,9 @@ class ArticleService implements IArticleService {
         Long cartId = client.getCart().getId();
 
         List <Article> articles = articleRepository.getCartArticles(cartId);
+        if (articles.isEmpty()) {
+            return new ArrayList<>();
+        }
 
         return articles;
     }
@@ -103,6 +107,9 @@ class ArticleService implements IArticleService {
     public List<Article> getArticlesWithoutCart() {
         List <Article> articles = articleRepository.getArticlesWithoutCart();
 
+        if (articles.isEmpty()) {
+            return new ArrayList<>();
+        }
         return articles;
     }
 

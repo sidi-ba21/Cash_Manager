@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddItemCartRequest {
-    private Long article_id;
+    private Long articleId;
 }
