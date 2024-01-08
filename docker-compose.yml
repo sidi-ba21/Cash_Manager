@@ -6,6 +6,8 @@ services:
         build:
             context: ./servers/cash
             dockerfile: Dockerfile
+        volumes:
+            - ./servers/cash:/app
         ports:
             - "8080:8080"
         depends_on:

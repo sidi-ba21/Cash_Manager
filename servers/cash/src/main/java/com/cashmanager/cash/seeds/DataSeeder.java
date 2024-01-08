@@ -1,4 +1,4 @@
-/*package com.cashmanager.cash.seeds;
+package com.cashmanager.cash.seeds;
 
 import com.cashmanager.cash.models.ClientAccount;
 import com.cashmanager.cash.models.Cart;
@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -21,12 +22,13 @@ import java.util.List;
 @Slf4j
 public class DataSeeder implements CommandLineRunner {
 
-	private final IClientAccountService clientService;
-	private final ICartService cartService;
-	private final IArticleService articleService;
+    private final IClientAccountService clientService;
+    private final ICartService cartService;
+    private final IArticleService articleService;
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
+        /*
 		if (clientService.count() > 0) {
 			return;
 		}
@@ -79,8 +81,8 @@ public class DataSeeder implements CommandLineRunner {
 		ValidateCartRequest validateCartRequest = new ValidateCartRequest("CARD", true);
 		this.cartService.validateCart(clientAccount1.getId(), validateCartRequest);
 
-
-	}
+	*/
+    }
 
 }
-*/
+
