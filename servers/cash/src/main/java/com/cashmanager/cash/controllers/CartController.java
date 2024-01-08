@@ -47,7 +47,7 @@ public class CartController {
         CartResponse response = new CartResponse();
 
         try {
-            Cart cart = cartService.findById(1L).orElse(null);
+            Cart cart = cartService.findById(id).orElse(null);
             if (cart == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }

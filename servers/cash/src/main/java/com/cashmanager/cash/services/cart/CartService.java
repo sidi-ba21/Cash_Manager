@@ -61,7 +61,7 @@ class CartService implements ICartService {
 
         Cart cart = client.getCart();
 
-        Article article = articleService.findById(data.getArticle_id()).orElse(null);
+        Article article = articleService.findById(data.getArticleId()).orElse(null);
 
         List <Article> articles = this.articleService.getCartArticles(id);
 
@@ -87,7 +87,7 @@ class CartService implements ICartService {
         Client client = clientAccount.getClient();
 
         Cart cart = client.getCart();
-        Article article = articleService.findById(data.getArticle_id()).orElse(null);
+        Article article = articleService.findById(data.getArticleId()).orElse(null);
 
         if (cart == null || article == null) {
             return;

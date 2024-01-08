@@ -13,6 +13,5 @@ public class UpdateArticleRequest {
 
     private String name;
     private Long price;
-    private Long quantity;
 
 }

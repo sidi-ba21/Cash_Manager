@@ -42,7 +42,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/allorders")
+    @GetMapping
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
         log.info("get all orders");
         List<OrderResponse> responses = new ArrayList<>();

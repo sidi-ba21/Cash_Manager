@@ -1,0 +1,37 @@
+### CREATE NEW ARTICLES
+
+POST http://127.0.0.1:8080/api/v1/articles
+Content-Type: application/json
+
+{
+  "name": "Article 1",
+  "price": 15,
+  "quantity": 10
+}
+
+
+### CREATE NEW ARTICLES
+POST http://127.0.0.1:8080/api/v1/articles
+Content-Type: application/json
+
+{
+  "name": "Article 2",
+  "price": 20,
+  "quantity": 5
+}
+
+
+### GET ALL ARTICLES
+GET http://127.0.0.1:8080/api/v1/articles
+
+### GET AVAILABLE ARTICLES
+GET http://127.0.0.1:8080/api/v1/articles/available
+
+### UPDATE ARTICLE
+PUT http://127.0.0.1:8080/api/v1/articles/1
+Content-Type: application/json
+
+{
+  "name": "Article 1",
+  "price": 30
+}

@@ -1,0 +1,69 @@
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/cart/add
+Content-Type: application/json
+
+{
+    "articleId": 1
+}
+
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/cart/add
+Content-Type: application/json
+
+{
+  "articleId": 1
+}
+
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/cart/add
+Content-Type: application/json
+
+{
+  "articleId": 1
+}
+
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/cart/add
+Content-Type: application/json
+
+{
+  "articleId": 2
+}
+
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/cart/add
+Content-Type: application/json
+
+{
+  "articleId": 2
+}
+
+### ADD ARTICLES TO THE CART
+POST http://127.0.0.1:8080/api/v1/cart/add
+Content-Type: application/json
+
+{
+  "articleId": 2
+}
+
+### REMOVE ARTICLES FROM THE CART
+POST http://127.0.0.1:8080/api/v1/cart/remove
+Content-Type: application/json
+
+{
+  "articleId": 1
+}
+
+### GET CART CLIENT ID
+GET http://127.0.0.1:8080/api/v1/cart/1
+
+### VALIDATE CART
+POST http://127.0.0.1:8080/api/v1/cart/validate
+Content-Type: application/json
+
+{
+  "typePayment": "CARD",
+  "allowed": true
+}
+
+
