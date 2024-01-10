@@ -81,7 +81,7 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/bg_secondary"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
                 android:hint="@string/login_placeholder_2"
                 android:textColorHint="@color/white"
                 android:background="@drawable/round_style"
