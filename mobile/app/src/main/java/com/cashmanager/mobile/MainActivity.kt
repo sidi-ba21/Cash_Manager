@@ -3,6 +3,7 @@ package com.cashmanager.mobile
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.cashmanager.mobile.fragments.AuthenticationFragment
@@ -22,14 +23,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Masquer la barre d'action (top bar)
+        supportActionBar?.hide()
+
         sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE)
 
         // Vérification si la clé "isLoggedIn" est définie
         if (sharedPreferences.contains("isLoggedIn")) {
              //Si la clé n'existe pas, initialisation à false
             with(sharedPreferences.edit()) {
-//                putBoolean("isLoggedIn", false)
-//                apply()
+                //putBoolean("isLoggedIn", false)
+                //apply()
             }
         }
 
@@ -38,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         if (isLoggedIn) {
             showLoggedInView()
         } else {
+            // Si l'utilisateur n'est pas connecté, masquez la BottomNavigationView
+            val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
+            navigationView.visibility = View.GONE
+
             loadFragment(AuthenticationFragment())
         }
 
