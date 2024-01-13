@@ -14,6 +14,10 @@ interface IArticleRepository extends JpaRepository<Article, Long> {
     @Query("SELECT a FROM Article a WHERE a.cart = null AND a.order = null")
     List<Article> getArticlesWithoutCart();
 
+    // get first article without cart and order match name
+    @Query("SELECT a FROM Article a WHERE a.cart = null AND a.order = null AND LOWER(a.name) = LOWER(:name)")
+    List<Article> getArticleWithoutCartAndOrderByName(@Param("name") String name);
+
     // get count of articles whithout cart, has same name and price return list of articles contains name and price and the count
 //    @Query("SELECT a.name, a.price, COUNT(a) FROM Article a WHERE a.cart.id = null GROUP BY a.name, a.price")
 //    List<Object[]> getArticlesWithoutCartGroupByNameAndPrice();

@@ -13,6 +13,7 @@ public interface IArticleService {
         Article add(AddArticleRequest data);
         Optional<Article> findById(Long id);
         List<Article> findAll();
+        Article findByName(String name);
 
         Article setInCart(Long id, Cart cart);
 
