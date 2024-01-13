@@ -53,7 +53,10 @@ class AuthenticationFragment: Fragment() {
             Method.POST, BASE_URL,
             Response.Listener { response ->
                 if (response.isNotEmpty()) {
-                    (activity as? MainActivity)?.updateLoginStatus(true)
+                    val jsonResponse = JSONObject(response)
+                    val id = jsonResponse.getInt("id")
+
+                    (activity as? MainActivity)?.updateLoginStatus(true, id)
                 }
             },
             Response.ErrorListener { error ->

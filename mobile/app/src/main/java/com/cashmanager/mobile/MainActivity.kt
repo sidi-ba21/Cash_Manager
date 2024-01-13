@@ -81,9 +81,10 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun updateLoginStatus(status: Boolean) {
+    fun updateLoginStatus(status: Boolean, id: Int) {
         val editor = sharedPreferences.edit()
         editor.putBoolean("isLoggedIn", status)
+        editor.putInt("id", id)
         editor.apply()
         recreate()
     }
