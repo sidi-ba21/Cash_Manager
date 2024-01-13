@@ -87,6 +87,15 @@ class ArticleService implements IArticleService {
     }
 
     @Override
+    public Article findByName(String name) {
+        List <Article> articles = articleRepository.getArticleWithoutCartAndOrderByName(name);
+        if (articles.isEmpty()) {
+            return null;
+        }
+        return articles.get(0);
+    }
+
+    @Override
     public List<Article> getCartArticles(Long id) {
         ClientAccount clientAccount = clientAccountService.findById(id).orElse(null);
         if (clientAccount == null) {

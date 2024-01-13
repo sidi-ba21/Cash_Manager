@@ -80,6 +80,26 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/available/{name}")
+    public ResponseEntity<ArticleResponse> getAvailableByName(@PathVariable String name) {
+        log.info("get available article by name : " + name);
+        ArticleResponse response = new ArticleResponse();
+
+        try {
+            Article article = articleService.findByName(name);
+            if (article == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
+
+            responseBody(response, article);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @GetMapping
     public ResponseEntity<List<ArticleResponse>> getAll() {
         log.info("get all articles");
